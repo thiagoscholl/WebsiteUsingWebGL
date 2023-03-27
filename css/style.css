@@ -1,0 +1,27 @@
+@import url("https://webgl2fundamentals.org/webgl/resources/webgl-tutorials.css");
+
+body {
+  margin: 0;
+  background-color: white;
+}
+
+canvas {
+  width: 270px;
+  height: 450px;
+  display: block;
+}
+
+
+.btn-custom {
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 0px;
+}
+
+.nav-item-custom {
+    font-weight: bold;
+}
+
+li {
+    list-style-type: none;
+  }

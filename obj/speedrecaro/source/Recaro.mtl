@@ -1,0 +1,16 @@
+# Blender MTL File: 'SEATS3.blend'
+# Material Count: 1
+
+newmtl RecaroSpeed
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump 4K Leathe\\RecaroSpeedLowPoly_RecaroSpeed_Normal.png
+map_Kd 4K Leathe\\RecaroSpeedLowPoly_RecaroSpeed_BaseColor.png
+map_Ns 4K Leathe\\RecaroSpeedLowPoly_RecaroSpeed_Roughness.png
+refl 4K Leathe\\RecaroSpeedLowPoly_RecaroSpeed_Metallic.png

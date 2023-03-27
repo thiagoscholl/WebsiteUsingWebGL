@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trabalho de CG</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  
+  <body onload="main()" >
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top mb-3" id="main-nav">
+      <div class="container">
+        <img class="navbar-brand img-fluid w-25 mt-2" src="./img/recarologored.png" alt="">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container"></div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ">
+              <li class="nav-item mt-2 pt-2 px-2 h5">
+                  <a class="nav-link text-danger nav-item-custom" href="#">Home</a>
+              </li>
+              <li class="nav-item mt-2 pt-2 px-2 h5">
+                  <a class="nav-link text-danger nav-item-custom" href="#">About</a>
+              </li>
+            </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container pt-3">
+      <!--  Texto do meio -->
+      <h1 class="text-center pb-5 h2">Models for Visualization</h1>
+      
+      <!--  Colunas -->
+      <div class="row gx-0 padding-0">
+
+        <!--  Primeira Coluna -->
+        <div class="col-lg-6 col-sm-12 p-2">
+          <div class="row g-0 ">
+
+            <!-- Subcoluna 1 -->
+            <div class="card border-0">
+              <div class="card-body">
+                <div class="row">
+
+                  <div class="col-6">
+                    <a>
+                      <div>
+                        <canvas id="canvas"></canvas>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-6">
+
+                    <h4 class="card-subtitle text-muted">Recaro</h4>
+                    <h2 class="card-title">Speed</h4>
+                    
+                    <li>
+                      <i class="fa fa-plus p-2" aria-hidden="true"></i>Backrest adjustment, manual
+                    </li>
+                    <li>
+                      <i class="fa fa-plus p-2" aria-hidden="true"></i>Integrated headsest
+                    </li>
+                    <li>
+                      <i class="fa fa-plus p-2" aria-hidden="true"></i>Special lateral support in the backrest area
+                    </li>
+                    <li>
+                      <i class="fa fa-plus p-2" aria-hidden="true"></i>Special lateral support in the seat cushion area
+                    </li>
+      
+                    <button class="btn btn-custom text-danger btn-block d-none d-md-block pt-4" type="button">
+                      <i class="fa fa-arrow-right"></i>
+                      360° View
+                    </button>
+                    <button class="btn btn-custom text-danger btn-sm btn-block d-md-none pt-2" type="button">
+                      <i class="fa fa-arrow-right"></i>
+                      360° View
+                    </button>
+  
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!--  Segunda Coluna -->
+        <div class="col-lg-6 col-sm-12 p-2">
+          <div class="row g-0 ">
+
+            <!-- Subcoluna 1 -->
+            <div class="card border-0">
+
+              <div class="card-body">
+                <div class="row">
+
+                  <div class="col-6">
+                    <a>
+                      <img src="./img/poleposition400x600.png" class="img-fluid" alt="">
+                    </a>
+                  </div>
+
+                  
+                  <div class="col-6">
+                    <h4 class="card-subtitle text-muted">Recaro</h4>
+                    <h2 class="card-title">Pole Position</h4>
+                    
+                    <li>
+                      <i class="fa fa-plus p-2" aria-hidden="true"></i>ABE/TUV component certification
+                    </li>
+                    <li>
+                      <i class="fa fa-plus p-2" aria-hidden="true"></i>Suitable for 3 or 4 point belts
+                    </li>
+                    <li>
+                      <i class="fa fa-plus p-2" aria-hidden="true"></i>Composite materials
+                    </li>
+                    <li>
+                      <i class="fa fa-plus p-2" aria-hidden="true"></i>Paddable lumbar support
+                    </li>
+      
+                    <button class="btn btn-custom text-danger btn-block d-none d-md-block pt-4" type="button">
+                      <i class="fa fa-arrow-right"></i>
+                      360° View
+                    </button>
+                    <button class="btn btn-custom text-danger btn-sm btn-block d-md-none pt-2" type="button">
+                      <i class="fa fa-arrow-right"></i>
+                      360° View
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+                  
+            </div>
+
+
+            <!-- Subcoluna 2 -->
+
+          </div>
+        </div>
+
+        <!--  Terceira Coluna -->
+
+
+          
+      </div>
+    </div>
+
+
+    
+    <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
+    <script src="https://webglfundamentals.org/webgl/resources/m4.js"></script>
+    <script src="https://webgl2fundamentals.org/webgl/resources/twgl-full.min.js"></script>
+    <script src="https://webgl2fundamentals.org/webgl/resources/m4.js"></script>
+    <script src="https://webgl2fundamentals.org/webgl/resources/webgl-lessons-ui.js"></script>
+    <script type="module" src="speed.js"></script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+  </body>
+
+</html>
