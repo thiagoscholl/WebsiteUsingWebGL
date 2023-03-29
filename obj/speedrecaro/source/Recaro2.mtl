@@ -1,0 +1,17 @@
+# Blender MTL File: 'SEATS3.blend'
+# Material Count: 1
+
+newmtl RecaroSpeed
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+map_Bump /Trabalho1/obj/speedrecaro/textures/alcantara_perforated.png
+map_Kd /Trabalho1/obj/speedrecaro/textures/alcantara_detail.png
+map_Ns /Trabalho1/obj/speedrecaro/textures/alcantara_bump.png
+refl /Trabalho1/obj/speedrecaro/textures/alcantara_perforated_bump.png

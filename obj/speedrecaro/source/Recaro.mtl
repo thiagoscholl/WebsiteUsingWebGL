@@ -10,7 +10,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Bump 4K Leathe\\RecaroSpeedLowPoly_RecaroSpeed_Normal.png
-map_Kd 4K Leathe\\RecaroSpeedLowPoly_RecaroSpeed_BaseColor.png
-map_Ns 4K Leathe\\RecaroSpeedLowPoly_RecaroSpeed_Roughness.png
-refl 4K Leathe\\RecaroSpeedLowPoly_RecaroSpeed_Metallic.png
+
+map_Bump /Trabalho1/obj/speedrecaro/textures/RecaroSpeedLowPoly_RecaroSpeed_Normal.png
+map_Kd /Trabalho1/obj/speedrecaro/textures/RecaroSpeedLowPoly_RecaroSpeed_BaseColor.png
+map_Ns /Trabalho1/obj/speedrecaro/textures/RecaroSpeedLowPoly_RecaroSpeed_Roughness.png
+refl /Trabalho1/obj/speedrecaro/textures/RecaroSpeedLowPoly_RecaroSpeed_Metallic.png

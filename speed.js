@@ -247,7 +247,7 @@ function makeIndexedIndicesFn(arrays) {
 async function main() {
   // Get A WebGL context
   /** @type {HTMLCanvasElement} */
-  const canvas = document.getElementById("canvas");
+  const canvas = document.getElementById("canvasSpeed");
   const gl = canvas.getContext("webgl2");
   if (!gl) {
     return;
@@ -367,7 +367,7 @@ async function main() {
     shininess: 400,
     opacity: 1,
   };
-
+  
   const parts = obj.geometries.map(({ material, data }) => {
     // Because data is just named arrays like this
     //
@@ -445,7 +445,7 @@ async function main() {
   const cameraTarget = [0, 0, 0];
   // figure out how far away to move the camera so we can likely
   // see the object.
-  const radius = m4.length(range) * 1.2;
+  const radius = m4.length(range) * 1.0;
   const cameraPosition = m4.addVectors(cameraTarget, [0, 0, radius]);
   // Set zNear and zFar to something hopefully appropriate
   // for the size of this object.

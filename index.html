@@ -32,8 +32,8 @@
 
     <div class="container pt-3">
       <!--  Texto do meio -->
-      <h1 class="text-center pb-5 h2">Models for Visualization</h1>
-      
+      <h1 class="text-center pt-3 pb-4 h2">See all models coming soon!</h1>
+
       <!--  Colunas -->
       <div class="row gx-0 padding-0">
 
@@ -49,14 +49,15 @@
                   <div class="col-6">
                     <a>
                       <div>
-                        <canvas id="canvas"></canvas>
+                        <canvas id="canvasSpeed"></canvas>
                       </div>
                     </a>
                   </div>
-
+                
+            <!-- Subcoluna 2 -->
                   <div class="col-6">
 
-                    <h4 class="card-subtitle text-muted">Recaro</h4>
+                    <h4 class="card-subtitle text-muted pt-4">Recaro</h4>
                     <h2 class="card-title">Speed</h4>
                     
                     <li>
@@ -72,15 +73,64 @@
                       <i class="fa fa-plus p-2" aria-hidden="true"></i>Special lateral support in the seat cushion area
                     </li>
       
-                    <button class="btn btn-custom text-danger btn-block d-none d-md-block pt-4" type="button">
+                    <!-- Botões 360 View -->
+                    <button type="button" class="btn btn-custom text-danger btn-block d-none d-md-block pt-4" data-bs-toggle="modal" data-bs-target="#speedvisualization">
                       <i class="fa fa-arrow-right"></i>
                       360° View
                     </button>
-                    <button class="btn btn-custom text-danger btn-sm btn-block d-md-none pt-2" type="button">
+                    <button type="button" class="btn btn-custom text-danger btn-sm btn-block d-md-none pt-2" data-toggle="modal" data-target="#speedvisualization">
                       <i class="fa fa-arrow-right"></i>
                       360° View
                     </button>
-  
+
+                    <!-- Modal de Visualização 3D -->
+                    <div class="modal fade" id="speedvisualization" tabindex="-1" role="dialog
+                     aria-labelledby="speedvisualizationLabel" ariahidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                          <div class="modal-header bg-danger border-bottom border-custom border-dark">
+                            <img class="modal-title img-fluid w-25" src="./img/recarologoblack.png" alt="">
+                            
+                            <button type="button" class="btn" data-bs-dismiss="modal">
+                              <i class="fa fa-times" style="color:#080808;font-size:24px" aria-hidden="true"></i>
+                            </button>
+                          </div>
+
+                          <div class="modal-body">
+                            <div class="container-fluid">
+                              <div class="row">
+
+                                <div class="col-6">
+                                  <canvas id="canvasSpeed360"></canvas>
+
+                                </div>
+
+                                <div class="col-6">
+                                  <div class="container pt-4">
+                                    <div>
+                                      <p>Rotação Y</p>
+                                      <input type="range" min="0" max="360" id="roty" value="0">
+                                    </div>
+                                    <div>
+                                      <p>Rotação X</p>
+                                      <input type="range" min="0" max="720" id="rotx" value="0">
+                                    </div>
+                                    <div>                                
+                                      <p>Zoom</p>
+                                      <input type="range" min="0" max="30" id="zoom" value="0">
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
 
                 </div>
@@ -88,6 +138,8 @@
             </div>
           </div>
         </div>
+          
+        
         
         <!--  Segunda Coluna -->
         <div class="col-lg-6 col-sm-12 p-2">
@@ -101,13 +153,14 @@
 
                   <div class="col-6">
                     <a>
-                      <img src="./img/poleposition400x600.png" class="img-fluid" alt="">
+                      <canvas id="canvasProfi"></canvas>
+                  <!--    <img src="./img/poleposition400x600.png" class="img-fluid" alt=""> -->
                     </a>
                   </div>
 
-                  
+                  <!-- Subcoluna 2 -->
                   <div class="col-6">
-                    <h4 class="card-subtitle text-muted">Recaro</h4>
+                    <h4 class="card-subtitle text-muted pt-4">Recaro</h4>
                     <h2 class="card-title">Pole Position</h4>
                     
                     <li>
@@ -133,6 +186,54 @@
                     </button>
                   </div>
 
+                  <div class="modal fade" id="speedvisualization" tabindex="-1" role="dialog
+                     aria-labelledby="speedvisualizationLabel" ariahidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                          <div class="modal-header bg-danger border-bottom border-custom border-dark">
+                            <img class="modal-title img-fluid w-25" src="./img/recarologoblack.png" alt="">
+                            
+                            <button type="button" class="btn" data-bs-dismiss="modal">
+                              <i class="fa fa-times" style="color:#080808;font-size:24px" aria-hidden="true"></i>
+                            </button>
+                          </div>
+
+                          <div class="modal-body">
+                            <div class="container-fluid">
+                              <div class="row">
+
+                                <div class="col-6">
+                              <!---->    <canvas id="canvasSpeed360"></canvas>
+
+                                </div>
+
+                                <div class="col-6">
+                                  <div class="container pt-4">
+                                    <div>
+                                      <p>Rotação Y</p>
+                                      <input type="range" min="0" max="360" id="roty" value="0">
+                                    </div>
+                                    <div>
+                                      <p>Rotação X</p>
+                                      <input type="range" min="0" max="720" id="rotx" value="0">
+                                    </div>
+                                    <div>                                
+                                      <p>Zoom</p>
+                                      <input type="range" min="0" max="30" id="zoom" value="0">
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </div>
+
                 </div>
               </div>
                   
@@ -145,8 +246,7 @@
         </div>
 
         <!--  Terceira Coluna -->
-
-
+  
           
       </div>
     </div>
@@ -158,7 +258,9 @@
     <script src="https://webgl2fundamentals.org/webgl/resources/twgl-full.min.js"></script>
     <script src="https://webgl2fundamentals.org/webgl/resources/m4.js"></script>
     <script src="https://webgl2fundamentals.org/webgl/resources/webgl-lessons-ui.js"></script>
-    <script type="module" src="speed.js"></script>
+    <script src="speed.js"></script>
+    <script src="speed360.js"></script>
+    <script src="profi.js"></script>
 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
