@@ -32,6 +32,11 @@ canvas {
     font-weight: bold;
 }
 
+.h7 {
+    font-size: 1.1rem;
+    text-align: center;
+}
+
 li {
   list-style-type: none;
 }

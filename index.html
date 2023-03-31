@@ -83,7 +83,7 @@
                       360° View
                     </button>
 
-                    <!-- Modal de Visualização 3D -->
+                    <!-- Modal de Visualização 360 -->
                     <div class="modal fade" id="speedvisualization" tabindex="-1" role="dialog
                      aria-labelledby="speedvisualizationLabel" ariahidden="true">
                       <div class="modal-dialog" role="document">
@@ -120,10 +120,28 @@
                                       <p>Zoom</p>
                                       <input type="range" min="0" max="30" id="zoom" value="0">
                                     </div>
+
+
+
                                   </div>
                                 </div>
 
                               </div>
+                            </div>
+                          </div>
+
+                          <div class="modal-footer bg-dark">
+                            <div class="row">
+                              <div class="col-10">
+                                <p class="h7 text-light text-custom">Still not sure which one do you like best?</p>
+                                <button class="justify-content-center btn btn-dark col-12 text-danger text-custom" type="button" >
+                                  <i class="fa fa-arrow-right"></i>
+                                  Compare Models!
+                                    </button>
+                              </div>
+                              <div class="col-2"></div>
+
+
                             </div>
                           </div>
 
@@ -153,7 +171,7 @@
 
                   <div class="col-6">
                     <a>
-                      <canvas id="canvasProfi"></canvas>
+                      <canvas id="canvasPole"></canvas>
                   <!--    <img src="./img/poleposition400x600.png" class="img-fluid" alt=""> -->
                     </a>
                   </div>
@@ -176,17 +194,17 @@
                       <i class="fa fa-plus p-2" aria-hidden="true"></i>Paddable lumbar support
                     </li>
       
-                    <button class="btn btn-custom text-danger btn-block d-none d-md-block pt-4" type="button">
+                    <button type="button" class="btn btn-custom text-danger btn-block d-none d-md-block pt-4" data-bs-toggle="modal" data-bs-target="#polevisualization">
                       <i class="fa fa-arrow-right"></i>
                       360° View
                     </button>
-                    <button class="btn btn-custom text-danger btn-sm btn-block d-md-none pt-2" type="button">
+                    <button type="button" class="btn btn-custom text-danger btn-sm btn-block d-md-none pt-2" data-toggle="modal" data-target="#polevisualization">
                       <i class="fa fa-arrow-right"></i>
                       360° View
                     </button>
                   </div>
 
-                  <div class="modal fade" id="speedvisualization" tabindex="-1" role="dialog
+                  <div class="modal fade" id="polevisualization" tabindex="-1" role="dialog
                      aria-labelledby="speedvisualizationLabel" ariahidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -204,7 +222,7 @@
                               <div class="row">
 
                                 <div class="col-6">
-                              <!---->    <canvas id="canvasSpeed360"></canvas>
+                                  <canvas id="canvasPole360"></canvas>
 
                                 </div>
 
@@ -212,15 +230,15 @@
                                   <div class="container pt-4">
                                     <div>
                                       <p>Rotação Y</p>
-                                      <input type="range" min="0" max="360" id="roty" value="0">
+                                      <input type="range" min="0" max="360" id="roty2" value="0">
                                     </div>
                                     <div>
                                       <p>Rotação X</p>
-                                      <input type="range" min="0" max="720" id="rotx" value="0">
+                                      <input type="range" min="0" max="720" id="rotx2" value="0">
                                     </div>
                                     <div>                                
                                       <p>Zoom</p>
-                                      <input type="range" min="0" max="30" id="zoom" value="0">
+                                      <input type="range" min="0" max="30" id="zoom2" value="0">
                                     </div>
                                   </div>
                                 </div>
@@ -229,9 +247,15 @@
                             </div>
                           </div>
 
-                        </div>
+                          <div class="modal-footer">
+                            <button class="btn btn-dark btn-block" type="button">
+                              Block
+                            </button>
+                          </div>
 
+                        </div>
                       </div>
+
                     </div>
 
                 </div>
@@ -251,7 +275,6 @@
       </div>
     </div>
 
-
     
     <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
     <script src="https://webglfundamentals.org/webgl/resources/m4.js"></script>
@@ -260,7 +283,8 @@
     <script src="https://webgl2fundamentals.org/webgl/resources/webgl-lessons-ui.js"></script>
     <script src="speed.js"></script>
     <script src="speed360.js"></script>
-    <script src="profi.js"></script>
+    <script src="poleposition.js"></script>
+    <script src="poleposition360.js"></script>
 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
