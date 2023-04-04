@@ -231,18 +231,6 @@ function parseMTL(text) {
   return materials;
 }
 
-function makeIndexedIndicesFn(arrays) {
-  const indices = arrays.indices;
-  let ndx = 0;
-  const fn = function () {
-    return indices[ndx++];
-  };
-  fn.reset = function () {
-    ndx = 0;
-  };
-  fn.numElements = indices.length;
-  return fn;
-}
 
 async function main() {
   // Get A WebGL context
@@ -327,7 +315,7 @@ async function main() {
   const matTexts = await Promise.all(
     obj.materialLibs.map(async (filename) => {
       // const matHref = new URL(filename, baseHref).href;
-      const response = await fetch("./obj/speedrecaro/source/Recaro.mtl");
+      const response = await fetch("./obj/speedrecaro/source/Recaro1.mtl");
       return await response.text();
     })
   );
@@ -457,7 +445,7 @@ async function main() {
   }
 
   function render(time) {
-    time *= 0.001; // convert to seconds
+    time *= 0.00085; // convert to seconds
 
     twgl.resizeCanvasToDisplaySize(gl.canvas);
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);

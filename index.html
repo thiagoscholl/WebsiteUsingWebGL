@@ -22,9 +22,6 @@
               <li class="nav-item mt-2 pt-2 px-2 h5">
                   <a class="nav-link text-danger nav-item-custom" href="#">Home</a>
               </li>
-              <li class="nav-item mt-2 pt-2 px-2 h5">
-                  <a class="nav-link text-danger nav-item-custom" href="#">About</a>
-              </li>
             </ul>
         </div>
       </div>
@@ -120,37 +117,23 @@
                                       <p>Zoom</p>
                                       <input type="range" min="0" max="30" id="zoom" value="0">
                                     </div>
-
-
-
+                                    <div class="pt-4">
+                                      <p class="h7 text-muted text-custom justify-content-center">Select color</p>
+                                      <button class="btn btn-dark" id="blacktex"></button>
+                                      <button class="btn btn-danger" id="redtex"></button>
+                                    </div>
                                   </div>
                                 </div>
-
                               </div>
                             </div>
                           </div>
 
-                          <div class="modal-footer bg-dark">
-                            <div class="row">
-                              <div class="col-10">
-                                <p class="h7 text-light text-custom">Still not sure which one do you like best?</p>
-                                <button class="justify-content-center btn btn-dark col-12 text-danger text-custom" type="button" >
-                                  <i class="fa fa-arrow-right"></i>
-                                  Compare Models!
-                                    </button>
-                              </div>
-                              <div class="col-2"></div>
-
-
-                            </div>
-                          </div>
+                          <div class="modal-footer bg-dark py-4"></div>
 
                         </div>
                       </div>
-
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -240,6 +223,11 @@
                                       <p>Zoom</p>
                                       <input type="range" min="0" max="30" id="zoom2" value="0">
                                     </div>
+                                    <div class="pt-4">
+                                      <p class="h7 text-muted text-custom justify-content-center">Select color</p>
+                                      <button class="btn btn-dark" id="blacktex2"></button>
+                                      <button class="btn btn-danger" id="redtex2"></button>
+                                    </div>
                                   </div>
                                 </div>
 
@@ -247,10 +235,7 @@
                             </div>
                           </div>
 
-                          <div class="modal-footer">
-                            <button class="btn btn-dark btn-block" type="button">
-                              Block
-                            </button>
+                          <div class="modal-footer bg-dark py-4">
                           </div>
 
                         </div>
@@ -260,20 +245,63 @@
 
                 </div>
               </div>
-                  
             </div>
-
-
-            <!-- Subcoluna 2 -->
-
           </div>
-        </div>
-
-        <!--  Terceira Coluna -->
-  
-          
+        </div>          
       </div>
     </div>
+
+    <div class="container mt-3">
+      <p class="h7 text-muted text-custom">Still not sure which one do you like best?</p>
+      <button class="justify-content-center btn btn-dark col-12 text-danger text-custom" data-bs-toggle="modal" data-bs-target="#comparemodels" type="button" >
+        <i class="fa fa-arrow-right"></i>
+        See More!
+      </button>
+
+      <div class="modal fade" id="comparemodels" tabindex="-1" role="dialog
+      aria-labelledby="comparemodelsLabel" ariahidden="true">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content">
+
+           <div class="modal-header bg-danger border-bottom border-custom border-dark">
+           </div>
+
+           <div class="modal-body">
+            <canvas id="compare"></canvas>
+           </div>
+
+           <div class="modal-footer bg-dark">
+           </div>
+
+         </div>
+       </div>
+
+     </div>
+
+      
+
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <canvas id="background"></canvas>
+
+    <footer class="bg-dark py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <p class="text-custom text-light"> Este site foi implementado pelo aluno Thiago Scholl da Universidade Federal de Pelotas com o objetivo de desenvolver o Trabalho 1 da disciplina de Computação Gráfica</p>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     
     <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
@@ -285,6 +313,8 @@
     <script src="speed360.js"></script>
     <script src="poleposition.js"></script>
     <script src="poleposition360.js"></script>
+    <script src="background.js"></script>
+    <script src="compare.js"></script>
 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

@@ -41,3 +41,18 @@ li {
   list-style-type: none;
 }
 
+#compare {
+  width: 100%;
+}
+
+#background {
+    position: fixed;
+  width: 100vw;
+  left: 0;
+  top: 2vw;
+  z-index: -1;
+  border: none;
+  pointer-events: none;
+  opacity: 0.5;
+  filter: blur(5px);
+}

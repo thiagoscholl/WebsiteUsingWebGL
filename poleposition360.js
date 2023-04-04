@@ -14,10 +14,6 @@ function parseOBJ(text) {
   const objColors = [[0, 0, 0]];
   
 
-
-  
-
-
   // same order as `f` indices
   const objVertexData = [objPositions, objTexcoords, objNormals, objColors];
 
@@ -239,19 +235,6 @@ function parseMTL(text) {
   return materials;
 }
 
-function makeIndexedIndicesFn(arrays) {
-  const indices = arrays.indices;
-  let ndx = 0;
-  const fn = function () {
-    return indices[ndx++];
-  };
-  fn.reset = function () {
-    ndx = 0;
-  };
-  fn.numElements = indices.length;
-  return fn;
-}
-
 async function main() {
   // Get A WebGL context
   /** @type {HTMLCanvasElement} */
@@ -319,147 +302,257 @@ async function main() {
     vec3 effectiveDiffuse = diffuse * diffuseMapColor.rgb * v_color.rgb;
     float effectiveOpacity = opacity * diffuseMapColor.a * v_color.a;
     outColor = vec4(
-        emissive +
+      emissive +
         ambient * u_ambientLight +
         effectiveDiffuse * fakeLight +
         effectiveSpecular * pow(specularLight, shininess),
         effectiveOpacity);
-  }
+      }
   `;
-
+  
   // compiles and links the shaders, looks up attribute and uniform locations
   const meshProgramInfo = twgl.createProgramInfo(gl, [vs, fs]);
+  
+  
 
-
-  const materialLibs = [];
   const geometries = [];
-
-  const cameraTarget = [0, 0, 0];;
+  
+  const cameraTarget = [0, 0.4, 0];;
   var yRotation = degToRad(0);
   var xRotation = degToRad(0);
-  const radius = 1.75;
-
+  const radius = 1.5;
+  
   const extents = getGeometriesExtents(geometries);
   const range = m4.subtractVectors(extents.max, extents.min);
   // amount to move the object so its center is at the origin
   const objOffset = m4.scaleVector(
-      m4.addVectors(
-        extents.min,
-        m4.scaleVector(range, 0.5)),
+    m4.addVectors(
+      extents.min,
+      m4.scaleVector(range, 0.5)),
       -1);
+      
+      const cameraPosition = m4.addVectors(cameraTarget, [
+        0,
+        0,
+        radius,
+      ]);
 
-  const cameraPosition = m4.addVectors(cameraTarget, [
-    0,
-    0,
-    radius,
-  ]);
-
-  //inputs range
-    const zoom = document.getElementById("zoom2");
-    zoom.addEventListener("input", () => {
-      const val = parseInt(zoom.value) * -0.05 + 1.75;
-      cameraPosition[2] = val;
-    });
-
-    const rotY = document.getElementById("roty2");
-    rotY.addEventListener("input", () => {
-      const val = degToRad(parseInt(rotY.value));
-      yRotation = val;
-    });
-
-    const rotX = document.getElementById("rotx2");
-    rotX.addEventListener("input", () => {
-      const val = degToRad(parseInt(rotX.value));
-      xRotation = val;
-    });
-
-  const objHref = "./obj/poleposition/source/poleposition.obj";
-  const response = await fetch(objHref);
-  const text = await response.text();
-  const obj = parseOBJ(text);
-  const baseHref = new URL(objHref, window.location.href);
-  const matTexts = await Promise.all(
-    obj.materialLibs.map(async (filename) => {
-      // const matHref = new URL(filename, baseHref).href;
-      const response = await fetch("./obj/poleposition/source/poleposition.mtl");
-      return await response.text();
-    })
-  );
-  const materials = parseMTL(matTexts.join("\n"));
-
-  const textures = {
-    defaultWhite: twgl.createTexture(gl, { src: [255, 255, 255, 255] }),
-  };
-
-  // load texture for materials
-  for (const material of Object.values(materials)) {
-    Object.entries(material)
-      .filter(([key]) => key.endsWith("Map"))
-      .forEach(([key, filename]) => {
-        let texture = textures[filename];
-        if (!texture) {
-          const textureHref = new URL(filename, baseHref).href;
-          texture = twgl.createTexture(gl, { src: textureHref, flipY: true });
-          textures[filename] = texture;
-        }
-        material[key] = texture;
+      //inputs range
+      const zoom = document.getElementById("zoom2");
+      zoom.addEventListener("input", () => {
+        const val = parseInt(zoom.value) * -0.05 + radius;
+        cameraPosition[2] = val;
       });
-  }
+      
+      const rotY = document.getElementById("roty2");
+      rotY.addEventListener("input", () => {
+        const val = degToRad(parseInt(rotY.value));
+        yRotation = val;
+      });
+      
+      const rotX = document.getElementById("rotx2");
+      rotX.addEventListener("input", () => {
+        const val = degToRad(parseInt(rotX.value));
+        xRotation = val;
+      });
 
-  // hack the materials so we can see the specular map
-  Object.values(materials).forEach((m) => {
-    m.shininess = 25;
-    m.specular = [3, 2, 1];
-  });
 
-  const defaultMaterial = {
-    diffuse: [1, 1, 1],
-    diffuseMap: textures.defaultWhite,
-    ambient: [0, 0, 0],
-    specular: [1, 1, 1],
-    specularMap: textures.defaultWhite,
-    shininess: 400,
-    opacity: 1,
-  };
-  
-  const parts = obj.geometries.map(({ material, data }) => {
-    // Because data is just named arrays like this
-    //
-    // {
-    //   position: [...],
-    //   texcoord: [...],
-    //   normal: [...],
-    // }
-    //
-    // and because those names match the attributes in our vertex
-    // shader we can pass it directly into `createBufferInfoFromArrays`
-    // from the article "less code more fun".
 
-    if (data.color) {
-      if (data.position.length === data.color.length) {
-        // it's 3. The our helper library assumes 4 so we need
-        // to tell it there are only 3.
-        data.color = { numComponents: 3, data: data.color };
-      }
-    } else {
-      // there are no vertex colors so just use constant white
-      data.color = { value: [1, 1, 1, 1] };
-    }
+      //var index = 1;
+      //loadTexture(index)
+    
+      var botaoblack = document.getElementById("blacktex2");
+      botaoblack.addEventListener("click", function() {
+        loadTexture(1);
+      });
 
-    // create a buffer for each array by calling
-    // gl.createBuffer, gl.bindBuffer, gl.bufferData
-    const bufferInfo = twgl.createBufferInfoFromArrays(gl, data);
-    const vao = twgl.createVAOFromBufferInfo(gl, meshProgramInfo, bufferInfo);
-    return {
-      material: {
-        ...defaultMaterial,
-        ...materials[material],
-      },
-      bufferInfo,
-      vao,
+      var botaored = document.getElementById("redtex2");
+      botaored.addEventListener("click", function() {
+        loadTexture(2);
+      });
+
+      //await loadTexture();
+      
+      //const objHref = "./obj/speedrecaro/source/Recaro.obj";
+      //const response = await fetch(objHref);
+      //const text = await response.text();
+      //const obj = parseOBJ(text);
+      async function loadTexture(index) {
+        
+        const objHref = "./obj/poleposition/source/poleposition.obj";
+        const response = await fetch(objHref);
+        const text = await response.text();
+        const obj = parseOBJ(text);
+    
+    
+        const baseHref = new URL(objHref, window.location.href);
+        
+        //if (blackbtn) {
+
+          const matTexts = await Promise.all(
+            obj.materialLibs.map(async (filename) => {
+
+            const response = await fetch("./obj/poleposition/source/poleposition" + index + ".mtl");
+            //const response = await fetch("./obj/speedrecaro/source/Recaro.mtl");
+            return await response.text();
+          })
+          );
+          console.log(matTexts)
+          const materials = parseMTL(matTexts.join("\n"));  
+          
+
+          
+          
+          //const baseHref = new URL(objHref, window.location.href);
+          //const matTexts = await Promise.all(
+    //  obj.materialLibs.map(async (filename) => {
+    //    const response = await fetch("./obj/speedrecaro/source/Recaro.mtl");
+    //    return await response.text();
+     // })
+    //);
+    //const materials = parseMTL(matTexts.join("\n"));
+    
+    const textures = {
+      defaultWhite: twgl.createTexture(gl, { src: [255, 255, 255, 255] }),
     };
-  });
+    
+    // load texture for materials
+    for (const material of Object.values(materials)) {
+      Object.entries(material)
+        .filter(([key]) => key.endsWith("Map"))
+        .forEach(([key, filename]) => {
+          let texture = textures[filename];
+          if (!texture) {
+            const textureHref = new URL(filename, baseHref).href;
+            texture = twgl.createTexture(gl, { src: textureHref, flipY: true });
+            textures[filename] = texture;
+          }
+          material[key] = texture;
+        });
+    }
+    
+    // hack the materials so we can see the specular map
+    Object.values(materials).forEach((m) => {
+      m.shininess = 25;
+      m.specular = [3, 2, 1];
+    });
+    
+    const defaultMaterial = {
+      diffuse: [1, 1, 1],
+      diffuseMap: textures.defaultWhite,
+      ambient: [0, 0, 0],
+      specular: [1, 1, 1],
+      specularMap: textures.defaultWhite,
+      shininess: 400,
+      opacity: 1,
+    };
+    
+    const parts = obj.geometries.map(({ material, data }) => {
+      // Because data is just named arrays like this
+      //
+      // {
+      //   position: [...],
+      //   texcoord: [...],
+      //   normal: [...],
+      // }
+      //
+      // and because those names match the attributes in our vertex
+      // shader we can pass it directly into `createBufferInfoFromArrays`
+      // from the article "less code more fun".
+    
+      if (data.color) {
+        if (data.position.length === data.color.length) {
+          // it's 3. The our helper library assumes 4 so we need
+          // to tell it there are only 3.
+          data.color = { numComponents: 3, data: data.color };
+        }
+      } else {
+        // there are no vertex colors so just use constant white
+        data.color = { value: [1, 1, 1, 1] };
+      }
+    
+      // create a buffer for each array by calling
+      // gl.createBuffer, gl.bindBuffer, gl.bufferData
+      const bufferInfo = twgl.createBufferInfoFromArrays(gl, data);
+      const vao = twgl.createVAOFromBufferInfo(gl, meshProgramInfo, bufferInfo);
 
+      return {
+        material: {
+          ...defaultMaterial,
+          ...materials[material],
+        },
+        bufferInfo,
+        vao,
+      };
+    });
+    
+    function render(time) {
+      time *= 0.001;  // convert to seconds
+    
+    
+      twgl.resizeCanvasToDisplaySize(gl.canvas);
+      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+      gl.enable(gl.DEPTH_TEST);
+    
+      const fieldOfViewRadians = degToRad(60);
+      const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
+      const projection = m4.perspective(fieldOfViewRadians, aspect, zNear, zFar);
+    
+      const up = [0, 1, 0];
+      // Compute the camera's matrix using look at.
+      const camera = m4.lookAt(cameraPosition, cameraTarget, up);
+    
+      // Make a view matrix from the camera matrix.
+      const view = m4.inverse(camera);
+    
+      const sharedUniforms = {
+        u_lightDirection: m4.normalize([-1, 3, 5]),
+        u_view: view,
+        u_projection: projection,
+        u_viewWorldPosition: cameraPosition,
+      };
+    
+      gl.useProgram(meshProgramInfo.program);
+    
+      // calls gl.uniform
+      twgl.setUniforms(meshProgramInfo, sharedUniforms);
+    
+      // compute the world matrix once since all parts
+      // are at the same space.
+      let u_world = m4.identity();
+      u_world = m4.translate(u_world, ...objOffset);
+      u_world = m4.yRotation(yRotation - 1.6);
+      u_world = m4.multiply(m4.xRotation(xRotation), u_world);
+      
+      
+      for (const { bufferInfo, vao, material } of parts) {
+        // set the attributes for this part.
+        gl.bindVertexArray(vao);
+        // calls gl.uniform
+        twgl.setUniforms(
+          meshProgramInfo,
+          {
+            u_world,
+          },
+          material
+          );
+          // calls gl.drawArrays or gl.drawElements
+          twgl.drawBufferInfo(gl, bufferInfo);
+        }
+        
+        requestAnimationFrame(render);
+      }
+      
+      //var radius = 8
+    
+      const zNear = radius / 100;
+      const zFar = radius * 3;
+    
+    
+    requestAnimationFrame(render);
+    
+  } 
+  
   function getExtents(positions) {
     const min = positions.slice(0, 3);
     const max = positions.slice(0, 3);
@@ -472,7 +565,7 @@ async function main() {
     }
     return { min, max };
   }
-
+  
   function getGeometriesExtents(geometries) {
     return geometries.reduce(
       ({ min, max }, { data }) => {
@@ -489,69 +582,11 @@ async function main() {
     );
   }
   
-    //var radius = 8
-  
-    const zNear = radius / 100;
-    const zFar = radius * 3;
-  
-  function render(time) {
-    time *= 0.001;  // convert to seconds
 
 
-    twgl.resizeCanvasToDisplaySize(gl.canvas);
-    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-    gl.enable(gl.DEPTH_TEST);
-
-    const fieldOfViewRadians = degToRad(60);
-    const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
-    const projection = m4.perspective(fieldOfViewRadians, aspect, zNear, zFar);
-
-    const up = [0, 1, 0];
-    // Compute the camera's matrix using look at.
-    const camera = m4.lookAt(cameraPosition, cameraTarget, up);
-
-    // Make a view matrix from the camera matrix.
-    const view = m4.inverse(camera);
-
-    const sharedUniforms = {
-      u_lightDirection: m4.normalize([-1, 3, 5]),
-      u_view: view,
-      u_projection: projection,
-      u_viewWorldPosition: cameraPosition,
-    };
-
-    gl.useProgram(meshProgramInfo.program);
-
-    // calls gl.uniform
-    twgl.setUniforms(meshProgramInfo, sharedUniforms);
-
-    // compute the world matrix once since all parts
-    // are at the same space.
-    let u_world = m4.identity();
-    u_world = m4.translate(u_world, ...objOffset);
-    u_world = m4.yRotation(yRotation);
-    u_world = m4.multiply(m4.xRotation(xRotation), u_world);
-
-
-    for (const { bufferInfo, vao, material } of parts) {
-      // set the attributes for this part.
-      gl.bindVertexArray(vao);
-      // calls gl.uniform
-      twgl.setUniforms(
-        meshProgramInfo,
-        {
-          u_world,
-        },
-        material
-      );
-      // calls gl.drawArrays or gl.drawElements
-      twgl.drawBufferInfo(gl, bufferInfo);
-    }
-
-    requestAnimationFrame(render);
-  }
-  requestAnimationFrame(render);
 };
+
+
 
 var m3 = {
     translation: function translation(tx, ty) {
@@ -614,3 +649,8 @@ var m3 = {
   };
 
 main();
+
+
+
+
+

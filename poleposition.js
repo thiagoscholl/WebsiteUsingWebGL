@@ -327,7 +327,7 @@ async function main() {
   const matTexts = await Promise.all(
     obj.materialLibs.map(async (filename) => {
       // const matHref = new URL(filename, baseHref).href;
-      const response = await fetch("./obj/poleposition/source/poleposition.mtl");
+      const response = await fetch("./obj/poleposition/source/poleposition1.mtl");
       return await response.text();
     })
   );
@@ -457,7 +457,7 @@ async function main() {
   }
 
   function render(time) {
-    time *= 0.001; // convert to seconds
+    time *= 0.000064; // convert to seconds
 
     twgl.resizeCanvasToDisplaySize(gl.canvas);
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
@@ -488,7 +488,7 @@ async function main() {
 
     // compute the world matrix once since all parts
     // are at the same space.
-    let u_world = m4.yRotation(time);
+    let u_world = m4.yRotation(11 * time );
     u_world = m4.translate(u_world, ...objOffset);
 
     for (const { bufferInfo, vao, material } of parts) {
